@@ -1,0 +1,160 @@
+{% extends 'doctor-header.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    
+    </head>
+    <body>
+	
+		
+		<!-- Breadcrumbs -->
+		<div class="breadcrumbs overlay">
+			<div class="container">
+				<div class="bread-inner">
+					<div class="row">
+						<div class="col-12">
+							<h2>Attend Appointment</h2>
+							<ul class="bread-list">
+								<li><a href="/">Home</a></li>
+								<li><i class="icofont-simple-right"></i></li>
+								<li class="active">Attend Appointment</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Breadcrumbs -->
+				
+		<!-- Start Contact Us -->
+		<section class="contact-us section">
+			<div class="container">
+				<div class="inner">
+					<div class="row"> 
+						
+						<div class="col-lg-12">
+							<div class="contact-us-form">
+								<h2>Attend Appointment</h2>
+								{% if msg %}
+									<b style="color: blue;">{{msg}}</b>
+								{% endif %}
+								<!-- Form -->
+								<form class="form" method="post" action="{% url 'attend-appointment' pk=appointment.pk %}" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="row">
+										<h3>Appointment Details</h3>
+										<br>
+										
+										
+										<h3>Doctor Details</h3>
+										<br>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder="Dr. {{appointment.doctor_profile.doctor.fname}} {{appointment.doctor_profile.doctor.lname}}" readonly>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder="{{appointment.doctor_profile.specialization}}" readonly>
+											</div>
+										</div>
+
+										<h3>Patient Details</h3>
+										<br>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder=" {{appointment.patient.fname}} {{appointment.patient.lname}}" readonly>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder="Mobile : {{appointment.patient.mobile}}" readonly>
+											</div>
+										</div>
+										
+										<h3>Follow Up Details</h3>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" name="problem_dignosed" placeholder="Problem Dignosed">
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" name="prescription" placeholder="Prescription">
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="date" id="date_picker" name="follow_up_date">
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group login-btn">
+												<button class="btn" type="submit">Complete Appointment</button>
+											</div>
+											
+										</div>
+									</div>
+								</form>
+								<!--/ End Form -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact-info">
+					<div class="row">
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont icofont-ui-call"></i>
+								<div class="content">
+									<h3>+(000) 1234 56789</h3>
+									<p>info@company.com</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont-google-map"></i>
+								<div class="content">
+									<h3>2 Fir e Brigade Road</h3>
+									<p>Chittagonj, Lakshmipur</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont icofont-wall-clock"></i>
+								<div class="content">
+									<h3>Mon - Sat: 8am - 5pm</h3>
+									<p>Sunday Closed</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Contact Us -->
+
+		
+    </body>
+    <script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()+1).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#date_picker').attr('min',today);
+</script>
+</html>
+{% endblock %}

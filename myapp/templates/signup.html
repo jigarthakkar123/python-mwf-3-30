@@ -1,0 +1,184 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        
+    </head>
+    <body>
+	
+		
+		<!-- Breadcrumbs -->
+		<div class="breadcrumbs overlay">
+			<div class="container">
+				<div class="bread-inner">
+					<div class="row">
+						<div class="col-12">
+							<h2>Sign Up</h2>
+							<ul class="bread-list">
+								<li><a href="/">Home</a></li>
+								<li><i class="icofont-simple-right"></i></li>
+								<li class="active">Sign Up</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Breadcrumbs -->
+				
+		<!-- Start Contact Us -->
+		<section class="contact-us section">
+			<div class="container">
+				<div class="inner">
+					<div class="row"> 
+						
+						<div class="col-lg-12">
+							<div class="contact-us-form">
+								<h2>Sign Up</h2>
+								{% if msg %}
+									<b style="color: blue;">{{msg}}</b>
+								{% endif %}
+								<!-- Form -->
+								<form class="form" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<select name="usertype">
+													<option>---Select User Type---</option>
+													<option value="Patient">Patient</option>
+													<option value="Doctor">Doctor</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<select name="gender">
+													<option>---Select Gender---</option>
+													<option value="male">Male</option>
+													<option value="female">Female</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="text" name="fname" placeholder="First Name">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="text" name="lname" placeholder="Last Name">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="email" name="email" id="email" placeholder="Email">
+												<span id="email_error"></span>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="text" name="mobile" placeholder="mobile">
+											</div>
+										</div>
+										
+										<div class="col-lg-12">
+											<div class="form-group">
+												<textarea name="address" placeholder="Your Address" required=""></textarea>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												Profile Picture : <input type="file" name="profile_picture">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="password" name="password" placeholder="Password">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="password" name="cpassword" placeholder="Confirm Password">
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group login-btn">
+												<button class="btn" type="submit">Sign Up</button>
+											</div>
+											
+										</div>
+									</div>
+								</form>
+								<!--/ End Form -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact-info">
+					<div class="row">
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont icofont-ui-call"></i>
+								<div class="content">
+									<h3>+(000) 1234 56789</h3>
+									<p>info@company.com</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont-google-map"></i>
+								<div class="content">
+									<h3>2 Fir e Brigade Road</h3>
+									<p>Chittagonj, Lakshmipur</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont icofont-wall-clock"></i>
+								<div class="content">
+									<h3>Mon - Sat: 8am - 5pm</h3>
+									<p>Sunday Closed</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Contact Us -->
+	<script>
+          $("#email").change(function(){
+            var email=$(this).val();
+            //alert(email);
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (data.is_taken) {
+                  /*document.getElementById("email").style.border="5px solid red";*/
+                  document.getElementById("email_error").innerHTML="This Email ID Is Already Registered";
+                }else{
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+        </script>
+    </body>
+</html>
+{% endblock %}

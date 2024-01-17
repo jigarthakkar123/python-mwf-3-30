@@ -1,0 +1,190 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+       <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+    
+    </head>
+    <body>
+	
+		
+		<!-- Breadcrumbs -->
+		<div class="breadcrumbs overlay">
+			<div class="container">
+				<div class="bread-inner">
+					<div class="row">
+						<div class="col-12">
+							<h2>Book Appointment</h2>
+							<ul class="bread-list">
+								<li><a href="/">Home</a></li>
+								<li><i class="icofont-simple-right"></i></li>
+								<li class="active">Book Appointment</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Breadcrumbs -->
+				
+		<!-- Start Contact Us -->
+		<section class="contact-us section">
+			<div class="container">
+				<div class="inner">
+					<div class="row"> 
+						
+						<div class="col-lg-12">
+							<div class="contact-us-form">
+								<h2>Book Appointment</h2>
+								{% if msg %}
+									<b style="color: blue;">{{msg}}</b>
+								{% endif %}
+								<!-- Form -->
+								<form class="form" method="post" action="{% url 'book-appointment' pk=doctor_profile.pk %}" enctype="multipart/form-data">
+									{% csrf_token %}
+									<div class="row">
+										<h3>Appointment Details</h3>
+										<br>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="date" id="date_picker" name="appointment_date" onchange="this.form.submit();" value="{{appointment_date}}">
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<select name="appointment_time" style="overflow: scroll;">
+
+													<option>---Select Time Slot---</option>
+													
+														{% if "9:00 Am To 10:00 Am" in l %}
+															<option value="9:00 Am To 10:00 Am" disabled>9:00 Am To 10:00 Am</option>
+														{% else %}
+															<option value="9:00 Am To 10:00 Am">9:00 Am To 10:00 Am</option>
+														{% endif %}
+														{% if "10:00 Am To 11:00 Am" in l %}
+															<option value="10:00 Am To 11:00 Am" disabled>10:00 Am To 11:00 Am</option>
+														{% else %}
+															<option value="10:00 Am To 11:00 Am">10:00 Am To 11:00 Am</option>
+														{% endif %}
+														{% if "11:00 Am To 12:00 Am" in l%}
+															<option value="11:00 Am To 12:00 Am" disabled>11:00 Am To 12:00 Am</option>
+														{% else %}
+															<option value="11:00 Am To 12:00 Am">11:00 Am To 12:00 Am</option>
+														{% endif %}
+														{% if "12:00 Pm To 1:00 Pm" in l %}
+															<option value="12:00 Pm To 1:00 Pm" disabled>12:00 Pm To 1:00 Pm</option>
+														{% else %}
+															<option value="12:00 Pm To 1:00 Pm">12:00 Pm To 1:00 Pm</option>
+														{% endif %}
+														{% if "4:00 Pm To 5:00 Pm" in l %}
+															<option value="4:00 Pm To 5:00 Pm" disabled>4:00 Pm To 5:00 Pm</option>
+														{% else %}
+															<option value="4:00 Pm To 5:00 Pm" >4:00 Pm To 5:00 Pm</option>
+														{% endif %}
+														{% if "5:00 Pm To 6:00 Pm" in l %}
+															<option value="5:00 Pm To 6:00 Pm" disabled>5:00 Pm To 6:00 Pm</option>
+														{% else %}
+															<option value="5:00 Pm To 6:00 Pm" >5:00 Pm To 6:00 Pm</option>
+														{% endif %}
+													
+													
+												</select>
+											</div>
+										</div>
+										<h3>Doctor Details</h3>
+										<br>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder="Dr. {{doctor_profile.doctor.fname}} {{doctor_profile.doctor.lname}}" readonly>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder="{{doctor_profile.specialization}}" readonly>
+											</div>
+										</div>
+
+										<h3>Patient Details</h3>
+										<br>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder=" {{patient.fname}} {{patient.lname}}" readonly>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="form-group">
+												<input type="text" placeholder="Mobile : {{patient.mobile}}" readonly>
+											</div>
+										</div>
+										
+										
+										
+										<div class="col-12">
+											<div class="form-group login-btn">
+												<button class="btn" type="submit">Book Appointment</button>
+											</div>
+											
+										</div>
+									</div>
+								</form>
+								<!--/ End Form -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact-info">
+					<div class="row">
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont icofont-ui-call"></i>
+								<div class="content">
+									<h3>+(000) 1234 56789</h3>
+									<p>info@company.com</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont-google-map"></i>
+								<div class="content">
+									<h3>2 Fir e Brigade Road</h3>
+									<p>Chittagonj, Lakshmipur</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+						<!-- single-info -->
+						<div class="col-lg-4 col-12 ">
+							<div class="single-info">
+								<i class="icofont icofont-wall-clock"></i>
+								<div class="content">
+									<h3>Mon - Sat: 8am - 5pm</h3>
+									<p>Sunday Closed</p>
+								</div>
+							</div>
+						</div>
+						<!--/End single-info -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ End Contact Us -->
+
+		
+    </body>
+    <script language="javascript">
+    var today = new Date();
+    var dd = String(today.getDate()+1).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#date_picker').attr('min',today);
+</script>
+</html>
+{% endblock %}
